@@ -9,8 +9,15 @@ def search_products(
 ):
     results = []
 
+    # Clean the category once
+    if category:
+        category = category.strip().lower()
+
     for product in products:
-        if category and product["category"].lower() != category.lower():
+        product_category = product["category"].strip().lower()
+
+        # 🔥 FIX 1 — fuzzy match instead of exact match
+        if category and category not in product_category:
             continue
 
         if min_price and product["price"] < min_price:
@@ -30,16 +37,31 @@ def search_products(
     return results
 
 
+
 def get_product_details(products, product_name: str):
+    product_name = product_name.strip().lower()
+
     for product in products:
-        if product["product_name"].lower() == product_name.lower():
+        db_name = product["product_name"].strip().lower()
+
+        # 🔥 fuzzy containment instead of exact equality
+        if product_name in db_name or db_name in product_name:
             return product
+
     return None
 
 
+
 def get_product_faqs(faqs, product_name: str):
+    product_name = product_name.strip().lower()
+
     for item in faqs:
-        if item["product_name"].lower() == product_name.lower():
+        db_name = item["product_name"].strip().lower()
+
+        # 🔥 fuzzy containment match
+        if product_name in db_name or db_name in product_name:
             return item.get("faqs", [])
+
     return []
+
 

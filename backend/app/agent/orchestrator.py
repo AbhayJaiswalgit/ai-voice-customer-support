@@ -222,11 +222,43 @@ POLICIES = load_policies()
 #     return run_agent(llm, message, context)
 
 from app.agent.react_agent import agent_executor
+from app.agent.memory import get_session, set_active_session
 
 # backend/app/agent/orchestrator.py
+# def process_message(session_id: str, message: str):
+#       # 🔥 THIS LINE IS CRITICAL
+
+#     session = get_session(session_id)
+#     set_active_session(session_id) 
+    
+#     input_text = f"User (ID: {session['customer_id']}): {message}"
+#     result = agent_executor.invoke({"input": input_text})
+#     return result["output"]
+
 def process_message(session_id: str, message: str):
     session = get_session(session_id)
-    # Include the customer_id in the prompt so the agent knows who is asking
+    set_active_session(session_id)
+
+    # 🔥 CHECK CONFIRMATION FIRST
+    pending = session["operational"].get("pending_action")
+
+    if pending and message.lower() in ["yes", "yes please", "confirm", "do it"]:
+        order_id = pending["order_id"]
+
+        if pending["type"] == "return":
+            order = get_order_by_id(ORDERS, order_id, session["customer_id"])
+            allowed, msg = can_return_order(order, PRODUCTS)
+            session["operational"].pop("pending_action")
+            return f"✅ Return initiated. {msg}"
+
+        if pending["type"] == "cancel":
+            order = get_order_by_id(ORDERS, order_id, session["customer_id"])
+            allowed, msg = can_cancel_order(order)
+            session["operational"].pop("pending_action")
+            return f"✅ Order cancelled. {msg}"
+
+    # normal agent flow
     input_text = f"User (ID: {session['customer_id']}): {message}"
     result = agent_executor.invoke({"input": input_text})
     return result["output"]
+

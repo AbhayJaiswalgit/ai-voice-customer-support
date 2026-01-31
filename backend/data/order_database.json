@@ -10,14 +10,10 @@
       {
         "product_id": "P1078",
         "product_name": "Whisper Perfume Mini"
-      },
-      {
-        "product_id": "P1030",
-        "product_name": "Vivid Dress Pro"
       }
     ],
-    "order_status": "Cancelled",
-    "order_date": "2025-03-25"
+    "order_status": "Placed",
+    "order_date": "2026-01-29"
   },
   {
     "order_id": "O0002",

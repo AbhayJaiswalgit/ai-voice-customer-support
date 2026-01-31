@@ -3,6 +3,13 @@
 # In-memory session store (safe for hackathon)
 SESSION_STORE = {}
 
+ACTIVE_SESSION_ID = None
+
+def set_active_session(session_id: str):
+    global ACTIVE_SESSION_ID
+    ACTIVE_SESSION_ID = session_id
+
+
 
 def get_session(session_id: str) -> dict:
     """
@@ -11,7 +18,7 @@ def get_session(session_id: str) -> dict:
 
     if session_id not in SESSION_STORE:
         SESSION_STORE[session_id] = {
-            "customer_id": "C0025",  # assumed logged-in user
+            "customer_id": "C0029",  # assumed logged-in user
             "operational": {},
             "human_context": {}
         }
