@@ -18,5 +18,6 @@ def load_faqs():
     return load_json("product_faqs.json")
 
 def load_policies():
-    with open(DATA_DIR / "policies.txt", "r", encoding="utf-8") as f:
-        return f.read()
+    return load_json("policies.json")
+    # with open(DATA_DIR / "policies.txt", "r", encoding="utf-8") as f:
+    #     return f.read()

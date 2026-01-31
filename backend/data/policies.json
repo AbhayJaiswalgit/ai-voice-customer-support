@@ -1,0 +1,18 @@
+{
+  "return_refund_policy": {
+    "keywords": ["return", "refund", "exchange", "money back"],
+    "content": "Customers can return items within 30 days of delivery. Items must be unused, in original packaging, and include all tags. Personal care items, consumables, and digital downloads are non-returnable. Refunds are processed within 7–10 business days after inspection."
+  },
+  "cancellation_policy": {
+    "keywords": ["cancel", "cancellation"],
+    "content": "Orders can be cancelled only before shipment. Once shipped or delivered, cancellation is not allowed and customers must initiate a return instead."
+  },
+  "delivery_policy": {
+    "keywords": ["delivery", "shipping", "timeline", "days"],
+    "content": "Standard delivery takes 5–7 business days. Express delivery takes 3–5 business days. Orders are dispatched within 24 hours of payment confirmation. Delivery timelines may vary due to logistics or location."
+  },
+  "return_process": {
+    "keywords": ["how to return", "initiate return", "return process"],
+    "content": "To initiate a return, contact customer support with your order ID and reason for return. Photos may be requested. Once approved, you will receive return authorization and shipping instructions."
+  }
+}
